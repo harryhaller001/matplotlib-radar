@@ -29,6 +29,7 @@ install-dev: install ## Install dependencies for development and production
 .PHONY : build
 build: ## Build python package
 	python3 -m build
+	python3 -m pip --require-virtualenv install .
 	python3 -m twine check --strict dist/*.whl
 
 .PHONY : upload
@@ -41,3 +42,14 @@ pytest: ## Run pytest with coverage
 	python3 -m coverage run -m pytest --maxfail=10
 	python3 -m coverage report -m
 	python3 -m coverage html
+
+uninstall: ## Uninstall package
+	python3 -m pip uninstall matplotlib_radar -y --quiet
+
+
+reinstall: uninstall ## Uninstall and install package
+	python3 -m pip --require-virtualenv install .
+
+
+format: ## Formatting code
+	isort matplotlib_radar/*.py
