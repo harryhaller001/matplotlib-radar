@@ -16,7 +16,7 @@
         "editor.formatOnSaveMode": "file",
         "editor.defaultFormatter": "charliermarsh.ruff"
     },
-    "python.analysis.extraPaths": ["pyclustree", "test", "examples"],
+    "python.analysis.extraPaths": ["matplotlib_radar", "test", "examples"],
     "python.analysis.exclude": ["**/venv/**", "**/__pycache__/**"],
     "python.defaultInterpreterPath": "venv/bin/python",
     "python.testing.unittestEnabled": false,

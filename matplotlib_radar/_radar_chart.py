@@ -27,6 +27,7 @@ def radar_chart(
     """Generate radar chart with matplotlib.
 
     .. code-block:: python
+
         from matplotlib_radar import radar_chart
         import numpy as np
 

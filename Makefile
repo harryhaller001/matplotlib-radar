@@ -8,17 +8,13 @@ help:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 
-# Virtual environment setup
-.PHONY : create-venv
-create-venv: ## Create virtualenv
-	python3 -m virtualenv 'venv'
-
 # Install requirements
 .PHONY : install
 install: ## Install dependencies for production
 	python3 -m pip --require-virtualenv install --upgrade pip
 	python3 -m pip --require-virtualenv install flit build
 	python3 -m flit install --deps production
+	python3 -m pip --require-virtualenv install .
 
 .PHONY : install-dev
 install-dev: install ## Install dependencies for development and production
@@ -29,7 +25,6 @@ install-dev: install ## Install dependencies for development and production
 .PHONY : build
 build: ## Build python package
 	python3 -m build
-	python3 -m pip --require-virtualenv install .
 	python3 -m twine check --strict dist/*.whl
 
 .PHONY : upload
