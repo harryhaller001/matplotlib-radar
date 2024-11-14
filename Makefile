@@ -48,6 +48,7 @@ reinstall: uninstall ## Uninstall and install package
 
 format: ## Formatting code
 	isort matplotlib_radar/*.py
+	isort tests/*.py
 
 freeze: ## Freeze dependencies
 	python3 --version > .python-version

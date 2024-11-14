@@ -117,19 +117,10 @@ addopts = [
 
 [tool.coverage.run]
 source = ["matplotlib_radar"]
-omit = ["*/test/*"]
+omit = ["*/tests/*"]
 
 [tool.coverage.report]
-exclude_lines = [
-  "if __name__ == __main__:",
-  "raise",
-  "except",
-  "warning",
-  "def __repr__",
-  "def __str__",
-  "file_path = Path",
-  "return None",
-] # don't complain if non-runnable code isn't run:
+exclude_lines = ["raise"]
 ignore_errors = true
 
 [tool.coverage.html]
