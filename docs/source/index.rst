@@ -1,7 +1,7 @@
 Welcome to the `matplotlib-radar` documentation!
 ================================================
 
-Feature-rich generation of radar chart. Based on matplotlib.
+Feature-rich generation of radar chart based on matplotlib.
 
 .. image:: _static/example-radar-chart.jpg
   :width: 400

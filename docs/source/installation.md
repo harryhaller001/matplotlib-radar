@@ -1,21 +1,15 @@
 # Installation
 
-## Installation Options
+## PyPi
 
-Choose an option to install this package.
-
-::::{tab-set}
-
-:::{tab-item} PyPi
 Install `matplotlib-radar` package using `pip`:
 
 ```bash
 pip install matplotlib-radar
 ```
 
-:::
+## Source
 
-:::{tab-item} Source
 Install `matplotlib-radar` from source:
 
 ```bash
@@ -30,7 +24,3 @@ source .venv/bin/activate
 # Install dependencies and package
 make install
 ```
-
-:::
-
-::::

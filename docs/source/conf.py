@@ -32,7 +32,6 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.githubpages",
     "sphinx_copybutton",
-    "sphinx_design",
     "sphinx_autodoc_typehints",
     "sphinx.ext.inheritance_diagram",
     "nbsphinx",
@@ -71,7 +70,6 @@ autoapi_options = [
 ]
 autoapi_dirs = ["../../matplotlib_radar"]
 autoapi_member_order = "alphabetical"
-autoapi_python_class_content = "init"  # ensures that the __init__ method is also displayed
 autodoc_typehints = "description"
 
 napoleon_google_docstring = True
@@ -83,7 +81,6 @@ napoleon_use_param = True
 
 intersphinx_mapping = dict(  # noqa: C408
     numpy=("https://numpy.org/doc/stable/", None),
-    # pandas=("https://pandas.pydata.org/pandas-docs/stable/", None),
     python=("https://docs.python.org/3", None),
     matplotlib=("https://matplotlib.org/stable", None),
 )

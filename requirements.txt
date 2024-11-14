@@ -119,7 +119,6 @@ sphinx-book-theme==1.1.3
 sphinx-copybutton==0.5.2
 sphinx-rtd-theme==3.0.1
 sphinx-tabs==3.4.7
-sphinx_design==0.6.1
 sphinxcontrib-applehelp==2.0.0
 sphinxcontrib-bibtex==2.6.3
 sphinxcontrib-devhelp==2.0.0
