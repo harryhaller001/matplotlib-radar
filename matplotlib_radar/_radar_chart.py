@@ -158,9 +158,7 @@ def radar_chart(
         ax.set_title(title, loc="center")
 
     # Show plot or return axes
-    if return_axis is False:
-        plt.show()
-    else:
+    if return_axis is True:
         return ax
 
     return None

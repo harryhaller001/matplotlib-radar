@@ -1,6 +1,6 @@
 """Configure the Sphinx documentation builder."""
 
-# -- Path setup --------------------------------------------------------------
+# Path setup
 import os
 import sys
 from pathlib import Path
@@ -10,13 +10,12 @@ from typing import Any
 DOCS_DIR = Path(__file__).parent
 sys.path.insert(0, os.path.abspath("../../matplotlib_radar"))
 
-# -- Project information -----------------------------------------------------
-
+# Project information
 project = "matplotlib_radar"
-copyright = "2024, Malte Hellmig"
-author = "Malte Hellmig"
+copyright = "2024, harryhaller001"
+author = "harryhaller001"
 
-# -- General configuration ---------------------------------------------------
+# Configuration
 
 templates_path = ["_templates"]
 exclude_patterns = [".DS_Store"]
@@ -72,9 +71,7 @@ autoapi_options = [
 ]
 autoapi_dirs = ["../../matplotlib_radar"]
 autoapi_member_order = "alphabetical"
-# autoapi_root = '/api'
 autoapi_python_class_content = "init"  # ensures that the __init__ method is also displayed
-
 autodoc_typehints = "description"
 
 napoleon_google_docstring = True
@@ -87,23 +84,17 @@ napoleon_use_param = True
 intersphinx_mapping = dict(  # noqa: C408
     numpy=("https://numpy.org/doc/stable/", None),
     # pandas=("https://pandas.pydata.org/pandas-docs/stable/", None),
-    # xarray=("https://docs.xarray.dev/en/stable/", None),
     python=("https://docs.python.org/3", None),
 )
 
-# -- Options for HTML output -------------------------------------------------
-
+# Options for HTML output
 html_theme = "furo"
-
 html_title = "matplotlib-radar"
-
 html_static_path = ["_static"]
-# html_logo = "_static/logo.png"
-
+html_logo = "_static/radar-chart.png"
 html_css_files = [
     "css/custom.css",
 ]
-
 html_context: dict[str, Any] = {
     "display_github": True,
     "github_user": "harryhaller001",
@@ -114,8 +105,9 @@ html_context: dict[str, Any] = {
     "show_powered_by": False,
 }
 html_show_sphinx = False
+html_favicon = "./_static/radar-chart.ico"
 
-pygments_style = "monokai"
+pygments_style = "default"
 
 plot_include_source = True
 plot_formats = [("svg", 90)]

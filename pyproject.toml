@@ -9,8 +9,8 @@ version = "0.1.0"
 description = "Radar chart for matplotlib"
 readme = "README.md"
 license = { file = "LICENSE" }
-maintainers = [{ name = "Malte Hellmig", email = "m.hellmig@uke.de" }]
-authors = [{ name = "Malte Hellmig" }]
+maintainers = [{ name = "harryhaller001", email = "harryhaller001@gmail.com" }]
+authors = [{ name = "harryhaller001" }]
 requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 3 - Alpha",
