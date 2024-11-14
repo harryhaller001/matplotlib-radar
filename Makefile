@@ -57,3 +57,6 @@ format: ## Formatting code
 freeze: ## Freeze dependencies
 	python3 --version > .python-version
 	python3 -m pip freeze --exclude matplotlib_radar > requirements.txt
+
+typing: ## Check typing of code with mypy
+	python3 -m mypy matplotlib_radar/*.py

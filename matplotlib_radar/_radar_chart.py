@@ -1,38 +1,160 @@
-from typing import List, Literal, Optional
+from typing import Dict, List, Optional, Union
 
+import matplotlib
 import numpy as np
 from matplotlib import pyplot as plt
-from matplotlib.axes import Axes
+from matplotlib.colors import Colormap
+from matplotlib.projections.polar import PolarAxes
+from numpy.typing import NDArray
 
 
-def radar_chart(  # noqa: D417
+def radar_chart(
     label: List[str],
-    axes_shape: Literal["circle", "polygon"] = "circle",
-    cmap=None,
-    ax: Optional[Axes] = None,
+    data: Union[
+        NDArray[np.number], List[int], List[float], Dict[str, Union[NDArray[np.number], List[int], List[float]]]
+    ],
+    cmap: Union[Colormap, str] = "tab10",
+    ax: Optional[PolarAxes] = None,
     show_figure: bool = True,
-) -> Axes:
+    show_grid: bool = True,
+    rotation: int = 0,
+    ticks: Union[int, List[float], List[int]] = 3,
+    vmax: Optional[Union[int, float]] = None,
+    vmin: Union[int, float] = 0,
+    title: Optional[str] = None,
+    opacity: float = 0.25,
+) -> Union[PolarAxes, None]:
     """Generate radar chart with matplotlib.
 
-    Args:
-        labels: List of labels to annotate plot.
-    """
-    r = np.arange(0, 2, 0.01)
-    theta = 2 * np.pi * r
+    .. code-block:: python
+        from matplotlib_radar import radar_chart
+        import numpy as np
 
+        radar_chart(
+            label=["A", "B", "C", "D", "E"],
+            data={"Sample 1": np.random.rand(5), "Sample 2": np.random.rand(5), "Sample 3": np.random.rand(5)},
+            title="Radar chart example",
+        )
+
+    Args:
+        label (List[str]): List of labels to annotate polar axes.
+        data (Union[NDArray[np.number], Dict[str, NDArray[np.number]]]): Data to plot as radar chart. As data type list
+            or numpy array of numbers are supported. If plotting multiple samples, data must be a dictionary with labels
+            as keys and data arrays as values.
+        cmap (Union[Colormap, str]): Colormap for coloring plot. Provide name of colormap as string (Both qualitative
+            and sequential colormaps are valid) or pass a Colormap object.
+        ax (Optional[PolarAxes], optional): Matplotlib axes. Axes are generate and returned if not provided. Defaults to
+            None.
+        show_figure (bool, optional): Whether to show the generated plot. If false, axes are returned. Defaults to True.
+        show_grid (bool, optional): Show grid. Defaults to True.
+        rotation (int, optional): Rotation of polar axes. Defaults to 0.
+        ticks (Union[int, List[float], List[int]]): Define ticks for plot. Provide number of ticks to generate or and
+            array of numbers to tick values. Defaults to 3.
+        vmax (Optional[Union[int, float]], optional): Axes maximal value. Defaults to None. If None, maximal value is
+            calculated from provided data.
+        vmin (Union[int, float], optional): Axes minimal value. Defaults to 0.
+        title (Optional[str], optional): Title of plot. Defaults to None.
+        opacity (float, optional): Alpha value of plot fill color. Defaults to 0.25.
+
+    Returns:
+        Union[PolarAxes, None]: Return axes if `show_figure=False`. Otherwise returns None.
+    """
+    # Check length and shape of labels and data array
+    assert len(label) > 1, "At least 1 label is required."
+
+    sample_labels: List[str] = []
+    sample_data: NDArray
+
+    if isinstance(data, list):
+        # Convert to list if data is numpy array
+        data = np.array(data)
+
+    if isinstance(data, np.ndarray):
+        assert len(data.shape) == 1, "If data is a numpy array, only 1 dimension is supported."
+        # Reshape data array if only 1 dim
+        sample_data = np.array([data])
+    elif isinstance(data, dict):
+        sample_labels = list(data.keys())
+        sample_data = np.array(list(data.values()))
+    else:
+        raise ValueError("Only data as 1 or 2 dimensional arrays are supported.")
+
+    assert len(label) == sample_data.shape[1]
+
+    # Generate angles for axes in polar plot
+    theta = np.linspace(0, 2 * np.pi, len(label), endpoint=False)
+
+    # If no axes are given as argument, generate them
     if ax is None:
         fig = plt.figure()
-        ax = fig.add_subplot(111, polar=True)
+        ax = fig.add_subplot(111, polar=True)  # type: ignore
 
-    ax.plot(theta, r)
+    assert ax is not None, "Axes at not defined."
 
-    ax.set_rticks([0.5, 1, 1.5, 2])  # Less radial ticks
-    ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
-    ax.grid(True)
+    # Get colormap for polygons
+    if isinstance(cmap, str):
+        cmap = matplotlib.colormaps.get_cmap(cmap)
+    elif isinstance(cmap, Colormap) is False:
+        raise ValueError("Type of argument 'cmap' not supported")
 
-    ax.set_title("A line plot on a polar axis", va="bottom")
+    if cmap.N > 20:
+        norm = plt.Normalize(vmin=0, vmax=sample_data.shape[0] - 1)
+    else:
+        norm = plt.Normalize(vmin=0, vmax=cmap.N - 1)
 
+    handles = []
+
+    for index, sample_data_item in enumerate(sample_data):
+        # Plot outline
+        (plot_handle,) = ax.plot(
+            np.concatenate((theta, [theta[0]])),
+            np.concatenate((sample_data_item, [sample_data_item[0]])),
+            linewidth=1,
+            color=cmap(norm(index)),
+            marker=None,
+            alpha=1,
+        )
+
+        # Append outline axis to handle
+        handles.append(plot_handle)
+
+        # Fill plotted outline
+        ax.fill(
+            np.concatenate((theta, [theta[0]])),
+            np.concatenate((sample_data_item, [sample_data_item[0]])),
+            alpha=opacity,
+            color=cmap(norm(index)),
+        )
+
+    # add estimation of vmax
+    if vmax is None:
+        vmax = sample_data.flatten().max() * 1.1
+
+    if isinstance(ticks, list):
+        ax.set_rticks(ticks)
+    else:
+        ax.set_rticks(np.round(np.linspace(vmin, vmax, ticks + 2), 2))  # Less radial ticks
+
+    ax.set_rlabel_position(-22)  # Move radial labels away from plotted line
+
+    ax.set_thetagrids(theta * 180 / np.pi, label)
+    ax.set_theta_offset(rotation / 180 * np.pi)
+
+    # Add/remove grid
+    ax.grid(show_grid)
+
+    # Add legend if multiple samples are provided
+    if len(sample_labels) > 0:
+        ax.legend(handles, sample_labels, loc="center", borderaxespad=0.0, bbox_to_anchor=(1, 1))
+
+    # Add title
+    if title is not None:
+        ax.set_title(title, loc="center")
+
+    # Show plot or return axes
     if show_figure is True:
         plt.show()
     else:
         return ax
+
+    return None
