@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := build-docs
 
 SPHINXOPTS    ?=
 SOURCEDIR     = source
@@ -8,7 +8,6 @@ help:
 	@sphinx-build -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 build-docs:
-	cp ../README.md ./source/introduction.md
 	rm -rf build
 	make html
 

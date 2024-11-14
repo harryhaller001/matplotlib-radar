@@ -6,8 +6,8 @@ Welcome to the `matplotlib-radar` documentation!
    :maxdepth: 4
    :glob:
 
-   introduction
    installation
+   notebooks/example
 
 
 .. toctree::

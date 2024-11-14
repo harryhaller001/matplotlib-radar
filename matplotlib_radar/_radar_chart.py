@@ -15,7 +15,7 @@ def radar_chart(
     ],
     cmap: Union[Colormap, str] = "tab10",
     ax: Optional[PolarAxes] = None,
-    show_figure: bool = True,
+    return_axis: bool = False,
     show_grid: bool = True,
     rotation: int = 0,
     ticks: Union[int, List[float], List[int]] = 3,
@@ -33,7 +33,11 @@ def radar_chart(
 
         radar_chart(
             label=["A", "B", "C", "D", "E"],
-            data={"Sample 1": np.random.rand(5), "Sample 2": np.random.rand(5), "Sample 3": np.random.rand(5)},
+            data={
+                "Sample 1": np.random.rand(5),
+                "Sample 2": np.random.rand(5),
+                "Sample 3": np.random.rand(5),
+            },
             title="Radar chart example",
         )
 
@@ -46,7 +50,8 @@ def radar_chart(
             and sequential colormaps are valid) or pass a Colormap object.
         ax (Optional[PolarAxes], optional): Matplotlib axes. Axes are generate and returned if not provided. Defaults to
             None.
-        show_figure (bool, optional): Whether to show the generated plot. If false, axes are returned. Defaults to True.
+        return_axis (bool, optional): Whether to return axis of the generated plot. If false, axes are returned.
+            Defaults to False.
         show_grid (bool, optional): Show grid. Defaults to True.
         rotation (int, optional): Rotation of polar axes. Defaults to 0.
         ticks (Union[int, List[float], List[int]]): Define ticks for plot. Provide number of ticks to generate or and
@@ -153,7 +158,7 @@ def radar_chart(
         ax.set_title(title, loc="center")
 
     # Show plot or return axes
-    if show_figure is True:
+    if return_axis is False:
         plt.show()
     else:
         return ax

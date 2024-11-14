@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "flit_core.buildapi"
 
-requires = [ "flit-core>=3.4,<4" ]
+requires = ["flit-core>=3.4,<4"]
 
 [project]
 name = "matplotlib-radar"
@@ -9,8 +9,8 @@ version = "0.1.0"
 description = "Radar chart for matplotlib"
 readme = "README.md"
 license = { file = "LICENSE" }
-maintainers = [ { name = "Malte Hellmig", email = "m.hellmig@uke.de" } ]
-authors = [ { name = "Malte Hellmig" } ]
+maintainers = [{ name = "Malte Hellmig", email = "m.hellmig@uke.de" }]
+authors = [{ name = "Malte Hellmig" }]
 requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -27,7 +27,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Typing :: Typed",
 ]
-dependencies = [ "matplotlib", "numpy" ]
+dependencies = ["matplotlib", "numpy"]
 
 optional-dependencies.dev = [
   "coverage",
@@ -55,6 +55,7 @@ optional-dependencies.dev = [
   "sphinxcontrib-bibtex>=1",
   "sphinxext-opengraph",
   "twine>=4.0.2",
+  "mypy",
 ]
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://github.com/harryhaller001/matplotlib-radar"
@@ -62,11 +63,11 @@ urls.Homepage = "https://github.com/harryhaller001/matplotlib-radar"
 urls.Source = "https://github.com/harryhaller001/matplotlib-radar"
 
 [tool.flit.sdist]
-exclude = [ "docs/*", "test/*" ]
+exclude = ["docs/*", "test/*"]
 
 [tool.ruff]
 line-length = 120
-extend-include = [ "*.ipynb" ]
+extend-include = ["*.ipynb"]
 
 format.docstring-code-format = true
 
@@ -98,9 +99,9 @@ lint.ignore = [
   "E731", # Do not assign a lambda expression, use a def -> lambda expression assignments are convenient
   "E741", # allow I, O, l as variable names -> I is the identity matrix
 ]
-lint.per-file-ignores."*/__init__.py" = [ "F401" ]
-lint.per-file-ignores."docs/*" = [ "I" ]
-lint.per-file-ignores."tests/*" = [ "D" ]
+lint.per-file-ignores."*/__init__.py" = ["F401"]
+lint.per-file-ignores."docs/*" = ["I"]
+lint.per-file-ignores."tests/*" = ["D"]
 lint.pydocstyle.convention = "google"
 
 [tool.pytest.ini_options]
@@ -108,15 +109,15 @@ log_format = "%(asctime)s %(levelname)s %(message)s"
 log_date_format = "%Y-%m-%d %H:%M:%S"
 log_level = "WARN"
 log_cli = "true"
-testpaths = [ "tests" ]
+testpaths = ["tests"]
 xfail_strict = true
 addopts = [
   "--import-mode=importlib", # allow using test files with same name
 ]
 
 [tool.coverage.run]
-source = [ "matplotlib_radar" ]
-omit = [ "*/test/*" ]
+source = ["matplotlib_radar"]
+omit = ["*/test/*"]
 
 [tool.coverage.report]
 exclude_lines = [
