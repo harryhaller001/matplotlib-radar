@@ -37,6 +37,7 @@ optional-dependencies.dev = [
   "ipykernel",
   "ipython",
   "ipywidgets",
+  "isort",
   "myst-parser",
   "nbsphinx",
   "pandoc",

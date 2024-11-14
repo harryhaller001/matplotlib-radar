@@ -53,3 +53,7 @@ reinstall: uninstall ## Uninstall and install package
 
 format: ## Formatting code
 	isort matplotlib_radar/*.py
+
+freeze: ## Freeze dependencies
+	python3 --version > .python-version
+	python3 -m pip freeze --exclude matplotlib_radar > requirements.txt
