@@ -1,4 +1,4 @@
-name: Check Build
+name: Build package (python 3.10)
 
 on:
   push:
