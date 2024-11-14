@@ -8,7 +8,14 @@ help:
 	@sphinx-build -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 build-docs:
+
+# Generate example image
+	python3 generate_example_plot.py
+
+# Remove pre build
 	rm -rf build
+
+# Build html
 	make html
 
 .PHONY: help Makefile

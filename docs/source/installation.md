@@ -22,8 +22,12 @@ Install `matplotlib-radar` from source:
 # Clone repo
 git clone https://github.com/harryhaller001/matplotlib-radar.git
 cd matplotlib-radar
+
+# Create virtualenv
 python3.10 -m virtualenv venv
 source .venv/bin/activate
+
+# Install dependencies and package
 make install
 ```
 

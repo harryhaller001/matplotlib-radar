@@ -1,6 +1,16 @@
 Welcome to the `matplotlib-radar` documentation!
 ================================================
 
+Feature-rich generation of radar chart. Based on matplotlib.
+
+.. image:: _static/example-radar-chart.jpg
+  :width: 400
+  :alt: Radar chart with 3 samples.
+
+Content
+-------
+
+
 .. toctree::
    :caption: Start
    :maxdepth: 4
@@ -19,7 +29,7 @@ Welcome to the `matplotlib-radar` documentation!
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

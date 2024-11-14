@@ -42,28 +42,35 @@ def radar_chart(
         )
 
     Args:
-        label (List[str]): List of labels to annotate polar axes.
-        data (Union[NDArray[np.number], Dict[str, NDArray[np.number]]]): Data to plot as radar chart. As data type list
-            or numpy array of numbers are supported. If plotting multiple samples, data must be a dictionary with labels
-            as keys and data arrays as values.
-        cmap (Union[Colormap, str]): Colormap for coloring plot. Provide name of colormap as string (Both qualitative
-            and sequential colormaps are valid) or pass a Colormap object.
-        ax (Optional[PolarAxes], optional): Matplotlib axes. Axes are generate and returned if not provided. Defaults to
-            None.
+        label (typing.List[str]): List of labels to annotate polar axes.
+        data (typing.Union[numpy.ndarray[numpy.number], typing.Dict[str, numpy.ndarray[numpy.number]]]):
+            Data to plot as radar chart. As data type list or numpy array of numbers are supported. If plotting multiple
+            samples, data must be a dictionary with labels as keys and data arrays as values.
+        cmap (typing.Union[matplotlib.colors.Colormap, str]): Colormap for coloring plot. Provide name of colormap as
+            string (both qualitative and sequential colormaps are valid) or pass a Colormap object. Defaults to
+            `"tab10"`.
+        ax (typing.Optional[matplotlib.projections.polar.PolarAxes], optional): Matplotlib axes. Axes are generate and
+            returned if not provided. Defaults to `None`.
         return_axis (bool, optional): Whether to return axis of the generated plot. If false, axes are returned.
-            Defaults to False.
-        show_grid (bool, optional): Show grid. Defaults to True.
-        rotation (int, optional): Rotation of polar axes. Defaults to 0.
-        ticks (Union[int, List[float], List[int]]): Define ticks for plot. Provide number of ticks to generate or and
-            array of numbers to tick values. Defaults to 3.
-        vmax (Optional[Union[int, float]], optional): Axes maximal value. Defaults to None. If None, maximal value is
-            calculated from provided data.
-        vmin (Union[int, float], optional): Axes minimal value. Defaults to 0.
-        title (Optional[str], optional): Title of plot. Defaults to None.
-        opacity (float, optional): Alpha value of plot fill color. Defaults to 0.25.
+            Defaults to `False`.
+        show_grid (bool, optional): Show grid. Defaults to `True`.
+        rotation (int, optional): Rotation of polar axes. Defaults to `0`.
+        ticks (typing.Union[int, typing.List[float], typing.List[int]]): Define ticks for plot. Provide number of ticks
+            to generate or and array of numbers to tick values. Defaults to `3`.
+        vmax (typing.Optional[typing.Union[int, float]], optional): Axes maximal value. Defaults to `None`. If None,
+            maximal value is calculated from provided data.
+        vmin (typing.Union[int, float], optional): Axes minimal value. Defaults to `0`.
+        title (typing.Optional[str], optional): Title of plot. Defaults to `None`.
+        opacity (float, optional): Alpha value of plot fill color. Defaults to `0.25`.
+
+    Raises:
+        AssertionError: If labels are not provided.
+        AssertionError: If data array has more than 2 dimensions.
+        TypeError: If other types besides `Colormap` or `str` are passed as `cmap` parameter.
 
     Returns:
-        Union[PolarAxes, None]: Return axes if `show_figure=False`. Otherwise returns None.
+        typing.Union[matplotlib.projections.polar.PolarAxes, None]: Return axes if `show_figure=False`. Otherwise
+        returns `None`.
     """
     # Check length and shape of labels and data array
     assert len(label) > 1, "At least 1 label is required."
@@ -83,7 +90,7 @@ def radar_chart(
         sample_labels = list(data.keys())
         sample_data = np.array(list(data.values()))
     else:
-        raise ValueError("Only data as 1 or 2 dimensional arrays are supported.")
+        raise AssertionError("Only data as 1 or 2 dimensional arrays are supported.")
 
     assert len(label) == sample_data.shape[1]
 
@@ -101,7 +108,7 @@ def radar_chart(
     if isinstance(cmap, str):
         cmap = matplotlib.colormaps.get_cmap(cmap)
     elif isinstance(cmap, Colormap) is False:
-        raise ValueError("Type of argument 'cmap' not supported")
+        raise TypeError("Type of argument 'cmap' not supported")
 
     if cmap.N > 20:
         norm = plt.Normalize(vmin=0, vmax=sample_data.shape[0] - 1)
