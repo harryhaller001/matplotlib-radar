@@ -38,7 +38,7 @@ jobs:
                     -   os: ubuntu-22.04
                         python: "3.8"
                         env:
-                            MYPYPATH=./.stubs
+                            MYPYPATH: ./.stubs
                     -   os: ubuntu-22.04
                         python: "3.9"
                     -   os: ubuntu-24.04
