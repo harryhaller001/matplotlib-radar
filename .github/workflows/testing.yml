@@ -82,6 +82,8 @@ jobs:
 
             # Install package from setup.py and static code analysis
             -   name: Static code analysis
+                env:
+                    MYPYPATH: ${{ matrix.env.MYPYPATH }}
                 run: |
                     mypy --python-version=${{ matrix.python }} ./matplotlib_radar ./docs/source/*.py ./tests
 
