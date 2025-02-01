@@ -81,7 +81,7 @@ jobs:
             # Install package from setup.py and static code analysis
             # Skip this step for python3.8
             -   name: Static code analysis
-                if: ${{ matrix.python != "3.8" }}
+                if: matrix.python != "3.8"
                 run: |
                     mypy --python-version=${{ matrix.python }} ./matplotlib_radar ./docs/source/*.py ./tests
 
