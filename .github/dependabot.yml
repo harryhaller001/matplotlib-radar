@@ -1,0 +1,22 @@
+---
+version: 2
+updates:
+    -   package-ecosystem: "github-actions"
+        directory: "/"
+        schedule:
+            interval: "weekly"
+            day: "wednesday"
+            time: "08:00"
+            timezone: "Europe/Berlin"
+        labels:
+            -   "github-actions dependencies"
+
+    -   package-ecosystem: "pip"
+        directory: "/"
+        schedule:
+            interval: "weekly"
+            day: "wednesday"
+            time: "08:00"
+            timezone: "Europe/Berlin"
+        labels:
+            -   "pip dependencies"
