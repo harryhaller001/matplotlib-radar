@@ -134,7 +134,7 @@ open-docs: ## Open build docs in webbrowser
 
 # Run all checks (always before committing!)
 .PHONY: check
-check: install freeze format typing testing docs precommit ## Full check of package
+check: install freeze format typing testing build docs precommit ## Full check of package
 
 
 
