@@ -3,7 +3,7 @@ Welcome to the `matplotlib-radar` documentation!
 
 Feature-rich generation of radar chart based on matplotlib.
 
-.. image:: _static/example-radar-chart.jpg
+.. image:: _static/image/example-radar-chart.jpg
   :width: 400
   :alt: Radar chart with 3 samples.
 

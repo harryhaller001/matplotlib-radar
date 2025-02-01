@@ -28,4 +28,8 @@ def test_plotting() -> None:
     radar_chart(label=["A", "B", "C"], data={"1": [1, 2, 3], "2": [4, 5, 6], "3": [7, 8, 9]})
 
     with pytest.raises(TypeError):
-        radar_chart(label=["A", "B", "C"], data=[1, 2, 3], cmap=None)
+        radar_chart(
+            label=["A", "B", "C"],
+            data=[1, 2, 3],
+            cmap=None,  # type: ignore
+        )

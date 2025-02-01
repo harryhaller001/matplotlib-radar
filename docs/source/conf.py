@@ -4,21 +4,20 @@
 import os
 import sys
 from pathlib import Path
-from typing import Any
-
+from typing import List
+from datetime import datetime
 
 DOCS_DIR = Path(__file__).parent
 sys.path.insert(0, os.path.abspath("../../matplotlib_radar"))
 
 # Project information
-project = "matplotlib_radar"
-copyright = "2024, harryhaller001"
+project = "matplotlib-radar"
 author = "harryhaller001"
+copyright = f"{datetime.now():%Y}, {author}."
 
 # Configuration
 
 templates_path = ["_templates"]
-exclude_patterns = [".DS_Store"]
 source_suffix = {
     ".rst": "restructuredtext",
     ".md": "markdown",
@@ -28,16 +27,18 @@ default_role = "literal"
 
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.napoleon",
-    "sphinx.ext.githubpages",
-    "sphinx_copybutton",
-    "sphinx_autodoc_typehints",
-    "sphinx.ext.inheritance_diagram",
     "nbsphinx",
     "autoapi.extension",
+    "sphinx.ext.napoleon",
+    "sphinx_autodoc_typehints",
+    # Required for syntax highlighing (https://github.com/spatialaudio/nbsphinx/issues/24)
+    "IPython.sphinxext.ipython_console_highlighting",
     "myst_parser",
 ]
+
 myst_enable_extensions = [
     "amsmath",
     "attrs_inline",
@@ -54,12 +55,34 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
+# Mapping for intersphinx extension
+intersphinx_mapping = dict(
+    python=("https://docs.python.org/3", None),
+    numpy=("https://numpy.org/doc/stable/", None),
+    matplotlib=("https://matplotlib.org/stable", None),
+    # pandas=("https://pandas.pydata.org/pandas-docs/stable/", None),
+    # anndata=("https://anndata.readthedocs.io/en/latest/", None),
+    # scipy=("https://docs.scipy.org/doc/scipy", None),
+    # sklearn=("https://scikit-learn.org/stable", None),
+    # flowio=("https://flowio.readthedocs.io/en/latest/", None),
+)
+
 # don't run the notebooks
 nbsphinx_execute = "never"
+pygments_style = "sphinx"
+
+exclude_trees = ["_build", "dist"]
+
+exclude_patterns = [
+    "_build",
+    "Thumbs.db",
+    ".DS_Store",
+]
+
 
 autoapi_type = "python"
 autoapi_add_toctree_entry = False
-autoapi_ignore: list[str] = ["_*.py"]
+autoapi_ignore: List[str] = ["_*.py"]
 autoapi_options = [
     "members",
     "undoc-members",
@@ -79,33 +102,35 @@ napoleon_include_special_with_doc = True
 napoleon_use_rtype = True
 napoleon_use_param = True
 
-intersphinx_mapping = dict(  # noqa: C408
-    numpy=("https://numpy.org/doc/stable/", None),
-    python=("https://docs.python.org/3", None),
-    matplotlib=("https://matplotlib.org/stable", None),
-)
 
 # Options for HTML output
-html_theme = "furo"
+html_theme = "sphinx_book_theme"
 html_title = "matplotlib-radar"
 html_static_path = ["_static"]
-html_logo = "_static/radar-chart.png"
+html_logo = "_static/image/radar-chart.png"
 html_css_files = [
     "css/custom.css",
 ]
-html_context: dict[str, Any] = {
-    "display_github": True,
-    "github_user": "harryhaller001",
-    "github_repo": "matplotlib-radar",
-    "github_version": "main",
-    "conf_py_path": "/docs/",
-    "github_button": True,
-    "show_powered_by": False,
-}
+html_theme_options = dict(
+    repository_url="https://github.com/harryhaller001/matplotlib-radar",
+    repository_branch="main",
+    use_download_button=True,
+    use_fullscreen_button=False,
+    use_repository_button=True,
+    # collapse_navbar=False,
+)
+html_context = dict(
+    display_github=True,
+    github_user="harryhaller001",
+    github_repo="matplotlib-radar",
+    github_version="main",
+    conf_py_path="/docs/",
+    github_button=True,
+    show_powered_by=False,
+)
 html_show_sphinx = False
 html_favicon = "./_static/radar-chart.ico"
 
-pygments_style = "default"
 
 plot_include_source = True
 plot_formats = [("svg", 90)]
