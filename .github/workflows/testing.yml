@@ -37,9 +37,7 @@ jobs:
                 include:
                     -   os: ubuntu-22.04
                         python: "3.8"
-                        env:
-                            MYPYPATH: ./.stubs
-                    -   os: ubuntu-22.04
+                    -   os: ubuntu-24.04
                         python: "3.9"
                     -   os: ubuntu-24.04
                         python: "3.10"
@@ -81,9 +79,9 @@ jobs:
 
 
             # Install package from setup.py and static code analysis
+            # Skip this step for python3.8
             -   name: Static code analysis
-                env:
-                    MYPYPATH: ${{ matrix.env.MYPYPATH }}
+                if: ${{ matrix.python != "3.8" }}
                 run: |
                     mypy --python-version=${{ matrix.python }} ./matplotlib_radar ./docs/source/*.py ./tests
 
