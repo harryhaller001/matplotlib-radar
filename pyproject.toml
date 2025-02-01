@@ -40,6 +40,7 @@ optional-dependencies.docs = [
 
 optional-dependencies.test = [
     "coverage",
+    "data-science-types; python_version=='3.8'", # Adding matplotlib type hints for py38
     "flit",
     "ipykernel",
     "ipython",
