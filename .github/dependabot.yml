@@ -8,8 +8,6 @@ updates:
             day: "wednesday"
             time: "08:00"
             timezone: "Europe/Berlin"
-        labels:
-            -   "github-actions dependencies"
 
     -   package-ecosystem: "pip"
         directory: "/"
@@ -18,5 +16,6 @@ updates:
             day: "wednesday"
             time: "08:00"
             timezone: "Europe/Berlin"
-        labels:
-            -   "pip dependencies"
+
+        # Disable pull requests for python deps
+        open-pull-requests-limit: 0
