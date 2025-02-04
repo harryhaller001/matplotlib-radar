@@ -1,9 +1,9 @@
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 import matplotlib
 import numpy as np
 from matplotlib import pyplot as plt
-from matplotlib.colors import Colormap
+from matplotlib.colors import Colormap, ListedColormap
 from matplotlib.projections.polar import PolarAxes
 from numpy.typing import NDArray
 
@@ -13,7 +13,7 @@ def radar_chart(
     data: Union[
         NDArray[np.number], List[int], List[float], Dict[str, Union[NDArray[np.number], List[int], List[float]]]
     ],
-    cmap: Union[Colormap, str] = "tab10",
+    cmap: Union[Colormap, str, List[str], List[Tuple[float, float, float]]] = "tab10",
     ax: Optional[PolarAxes] = None,
     return_axis: bool = False,
     show_grid: bool = True,
@@ -46,7 +46,7 @@ def radar_chart(
         data (typing.Union[numpy.ndarray[numpy.number], typing.Dict[str, numpy.ndarray[numpy.number]]]):
             Data to plot as radar chart. As data type list or numpy array of numbers are supported. If plotting multiple
             samples, data must be a dictionary with labels as keys and data arrays as values.
-        cmap (typing.Union[matplotlib.colors.Colormap, str]): Colormap for coloring plot. Provide name of colormap as
+        cmap (typing.Union[matplotlib.colors.Colormap, str, typing.List[str], typing.List[typing.Tuple[float, float, float]]], optional): Colormap for coloring plot. Provide name of colormap as
             string (both qualitative and sequential colormaps are valid) or pass a Colormap object. Defaults to
             `"tab10"`.
         ax (typing.Optional[matplotlib.projections.polar.PolarAxes], optional): Matplotlib axes. Axes are generate and
@@ -107,8 +107,11 @@ def radar_chart(
     # Get colormap for polygons
     if isinstance(cmap, str):
         cmap = matplotlib.colormaps.get_cmap(cmap)
-    elif isinstance(cmap, Colormap) is False:
-        raise TypeError("Type of argument 'cmap' not supported")
+    elif isinstance(cmap, list) is True:
+        cmap = ListedColormap(cmap)
+
+    if not isinstance(cmap, Colormap):
+        raise TypeError(f"Type '{type(cmap).__name__}' of argument 'cmap' not supported")
 
     if cmap.N > 20:
         norm = plt.Normalize(vmin=0, vmax=sample_data.shape[0] - 1)

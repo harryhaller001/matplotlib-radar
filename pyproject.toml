@@ -147,7 +147,7 @@ source = [ "matplotlib_radar" ]
 omit = [ "*/tests/*" ]
 
 [tool.coverage.report]
-exclude_lines = [ "raise" ]
+exclude_lines = [ "raise", "pass" ]
 ignore_errors = true
 
 [tool.coverage.html]

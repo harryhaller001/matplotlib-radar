@@ -15,6 +15,9 @@ def test_plotting() -> None:
     # Testing sequential colormap as parameter
     radar_chart(label=["A", "B", "C"], data=[1, 2, 3], cmap="viridis")
 
+    # Testing list of colors as parameter for cmap
+    radar_chart(label=["A", "B", "C"], data=[1, 2, 3], cmap=["#C70E7B", "#1BB6AF"])
+
     # Testing title
     radar_chart(label=["A", "B", "C"], data=[1, 2, 3], title="Testing")
 
