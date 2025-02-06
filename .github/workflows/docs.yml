@@ -52,7 +52,7 @@ jobs:
                 path: ./docs/_build/html
 
 
-    # deploy:
+    deploy:
         # Deployment job
         needs: docs
 
