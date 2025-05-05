@@ -4,7 +4,6 @@
 import os
 import sys
 from pathlib import Path
-from typing import List
 from datetime import datetime
 
 DOCS_DIR = Path(__file__).parent
@@ -82,7 +81,7 @@ exclude_patterns = [
 
 autoapi_type = "python"
 autoapi_add_toctree_entry = False
-autoapi_ignore: List[str] = ["_*.py"]
+autoapi_ignore: list[str] = ["_*.py"]
 autoapi_options = [
     "members",
     "undoc-members",

@@ -1,5 +1,3 @@
-from typing import Dict, List, Optional, Tuple, Union
-
 import matplotlib
 import numpy as np
 from matplotlib import pyplot as plt
@@ -9,21 +7,19 @@ from numpy.typing import NDArray
 
 
 def radar_chart(
-    label: List[str],
-    data: Union[
-        NDArray[np.number], List[int], List[float], Dict[str, Union[NDArray[np.number], List[int], List[float]]]
-    ],
-    cmap: Union[Colormap, ListedColormap, str, List[str], List[Tuple[float, float, float]]] = "tab10",
-    ax: Optional[PolarAxes] = None,
+    label: list[str],
+    data: NDArray[np.number] | list[int] | list[float] | dict[str, NDArray[np.number] | list[int] | list[float]],
+    cmap: Colormap | ListedColormap | str | list[str] | list[tuple[float, float, float]] = "tab10",
+    ax: PolarAxes | None = None,
     return_axis: bool = False,
     show_grid: bool = True,
     rotation: int = 0,
-    ticks: Union[int, List[float], List[int]] = 3,
-    vmax: Optional[Union[int, float]] = None,
-    vmin: Union[int, float] = 0,
-    title: Optional[str] = None,
+    ticks: int | list[float] | list[int] = 3,
+    vmax: int | float | None = None,
+    vmin: int | float = 0,
+    title: str | None = None,
     opacity: float = 0.25,
-) -> Union[PolarAxes, None]:
+) -> PolarAxes | None:
     """Generate radar chart with matplotlib.
 
     .. code-block:: python
@@ -75,7 +71,7 @@ def radar_chart(
     # Check length and shape of labels and data array
     assert len(label) > 1, "At least 1 label is required."
 
-    sample_labels: List[str] = []
+    sample_labels: list[str] = []
     sample_data: NDArray
 
     if isinstance(data, list):
