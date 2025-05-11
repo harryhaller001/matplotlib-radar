@@ -27,6 +27,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Typing :: Typed",
 ]
 dynamic = [ "version" ]
@@ -120,7 +121,7 @@ lint.pydocstyle.convention = "google"
 column_width = 120            # after how many column width split arrays/dicts into multiple lines, 1 will force always
 indent = 4
 keep_full_version = false     # if false will remove unnecessary trailing ``.0``'s from version specifiers
-max_supported_python = "3.12" # maximum Python version to use when generating version specifiers
+max_supported_python = "3.13" # maximum Python version to use when generating version specifiers
 
 [tool.pytest.ini_options]
 # Pytest config
