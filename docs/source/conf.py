@@ -59,11 +59,6 @@ intersphinx_mapping = dict(
     python=("https://docs.python.org/3", None),
     numpy=("https://numpy.org/doc/stable/", None),
     matplotlib=("https://matplotlib.org/stable", None),
-    # pandas=("https://pandas.pydata.org/pandas-docs/stable/", None),
-    # anndata=("https://anndata.readthedocs.io/en/latest/", None),
-    # scipy=("https://docs.scipy.org/doc/scipy", None),
-    # sklearn=("https://scikit-learn.org/stable", None),
-    # flowio=("https://flowio.readthedocs.io/en/latest/", None),
 )
 
 # don't run the notebooks

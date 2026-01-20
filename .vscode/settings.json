@@ -18,13 +18,13 @@
     },
     "python.analysis.extraPaths": [
         "matplotlib_radar",
-        "test",
+        "tests",
         "examples"
     ],
     "python.analysis.exclude": [
         "**/__pycache__/**"
     ],
-    "python.defaultInterpreterPath": "venv/bin/python",
+    "python.defaultInterpreterPath": ".venv/bin/python",
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "files.insertFinalNewline": true,

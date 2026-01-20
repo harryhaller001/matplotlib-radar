@@ -2,10 +2,12 @@
 
 ## PyPi
 
-Install `matplotlib-radar` package using `pip`:
+Install `matplotlib-radar` package using `pip` or `uv`:
 
 ```bash
 pip install matplotlib-radar
+# or
+uv add matplotlib-radar
 ```
 
 ## Source
@@ -18,8 +20,7 @@ git clone https://github.com/harryhaller001/matplotlib-radar.git
 cd matplotlib-radar
 
 # Create virtualenv
-python3.10 -m virtualenv venv
-source .venv/bin/activate
+uv venv
 
 # Install dependencies and package
 make install
