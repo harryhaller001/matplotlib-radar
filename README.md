@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/pypi/v/matplotlib-radar)](https://pypi.org/project/matplotlib-radar/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/matplotlib-radar)
 [![codecov](https://codecov.io/gh/harryhaller001/matplotlib-radar/graph/badge.svg?token=WO0CGOVJOH)](https://codecov.io/gh/harryhaller001/matplotlib-radar)
+[![DOI](https://zenodo.org/badge/887523984.svg)](https://doi.org/10.5281/zenodo.18319215)
 
 Feature-rich generation of radar chart based on matplotlib.
 

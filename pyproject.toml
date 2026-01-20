@@ -53,8 +53,7 @@ optional-dependencies.test = [
 ]
 
 # https://docs.pypi.org/project_metadata/#project-urls
-urls.Documentation = "https://github.com/harryhaller001/matplotlib-radar"
-urls.Homepage = "https://github.com/harryhaller001/matplotlib-radar"
+urls.Documentation = "https://harryhaller001.github.io/matplotlib-radar/"
 urls.Source = "https://github.com/harryhaller001/matplotlib-radar"
 
 [tool.flit.sdist]

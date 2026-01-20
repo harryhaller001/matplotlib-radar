@@ -13,6 +13,9 @@ Welcome to the `matplotlib-radar` documentation!
 .. image:: https://img.shields.io/pypi/pyversions/matplotlib-radar
    :alt: PyPI - Python Version
 
+.. image:: https://zenodo.org/badge/887523984.svg
+   :target: https://doi.org/10.5281/zenodo.18319215
+
 Feature-rich generation of radar chart based on matplotlib.
 
 .. image:: _static/image/example-radar-chart.jpg
