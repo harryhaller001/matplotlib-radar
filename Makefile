@@ -9,16 +9,15 @@ PACKAGE_DIR		= $(BASE_DIR)/matplotlib_radar
 TEST_DIR		= $(BASE_DIR)/tests
 DOCS_DIR		= $(BASE_DIR)/docs
 
-PYTHON_OPT		= python3
-PIP_OPT			= $(PYTHON_OPT) -m pip --require-virtualenv
-MYPY_OPT		= $(PYTHON_OPT) -m mypy
-TEST_OPT		= $(PYTHON_OPT) -m pytest
-TWINE_OPT		= $(PYTHON_OPT) -m twine
-SPHINX_OPT		= $(PYTHON_OPT) -m sphinx
-COVERAGE_OPT	= $(PYTHON_OPT) -m coverage
-FLIT_OPT		= $(PYTHON_OPT) -m flit
-RUFF_OPT		= $(PYTHON_OPT) -m ruff
-PRE_COMMIT_OPT	= pre-commit
+UV_OPT			= uv run
+MYPY_OPT		= $(UV_OPT) mypy
+TEST_OPT		= $(UV_OPT) pytest
+TWINE_OPT		= $(UV_OPT) twine
+SPHINX_OPT		= $(UV_OPT) python -m sphinx
+COVERAGE_OPT	= $(UV_OPT) coverage
+FLIT_OPT		= $(UV_OPT) flit
+RUFF_OPT		= $(UV_OPT) ruff
+PRE_COMMIT_OPT	= $(UV_OPT) pre-commit
 
 # Run help by default
 
@@ -39,34 +38,24 @@ help: ## This help.
 install: ## install all python dependencies
 
 # Install dev dependencies
-	@$(PIP_OPT) install -e ".[test,docs]" --upgrade
-
-
-.PHONY : freeze
-freeze: ## Freeze package dependencies
-	@$(PYTHON_OPT) --version > .python-version
-	@$(PIP_OPT) freeze --exclude $(PACKAGE_NAME) > requirements.txt
+	uv sync --all-extras
 
 
 
+# .PHONY : build
+# build: # Twine package upload and checks
 
-.PHONY : build
-build: # Twine package upload and checks
+# # Remove dist folder
+# 	@rm -rf ./dist/*
 
-# Remove old keggtools package
-	@$(PIP_OPT) uninstall $(PACKAGE_NAME) -y --quiet
+# # Build package with flit backend
+# 	@$(FLIT_OPT) build --setup-py
 
-# Remove dist folder
-	@rm -rf ./dist/*
+# # Check package using twine
+# 	@$(TWINE_OPT) check --strict ./dist/*
 
-# Build package with flit backend
-	@$(FLIT_OPT) build --setup-py
-
-# Check package using twine
-	@$(TWINE_OPT) check --strict ./dist/*
-
-# Install package with flit
-	@$(FLIT_OPT) install --deps=none
+# # Install package with flit
+# 	@$(FLIT_OPT) install --deps=none
 
 
 
@@ -93,25 +82,6 @@ typing: ## Run static code analysis
 
 
 
-.PHONY: clean
-clean: ## Clean all build and caching directories
-
-# Remove package build folders
-	@rm -rf ./build
-	@rm -rf ./dist
-	@rm -rf ./$(PACKAGE_NAME).egg-info
-
-# Remove mypy and pytest caching folders
-	@rm -rf ./.mypy_cache
-	@rm -rf ./.pytest_cache
-	@rm -rf ./coverage
-	@rm -f .coverage
-
-# Remove build folders for docs
-	@rm -rf ./docs/_build
-	@rm -rf ./docs/dist
-
-
 
 .PHONY: docs
 docs: ## Build sphinx docs
@@ -124,17 +94,9 @@ docs: ## Build sphinx docs
 	@$(SPHINX_OPT) -M html $(DOCS_DIR)/source $(DOCS_DIR)/_build
 
 
-.PHONY : open-docs
-open-docs: ## Open build docs in webbrowser
-	@$(PYTHON_OPT) -m webbrowser -t file:///${PWD}/docs/_build/html/index.html
-
-
-
-
-
 # Run all checks (always before committing!)
 .PHONY: check
-check: install freeze format typing testing build docs precommit ## Full check of package
+check: install format typing testing docs precommit ## Full check of package
 
 
 

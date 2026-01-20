@@ -8,14 +8,3 @@ updates:
             day: "wednesday"
             time: "08:00"
             timezone: "Europe/Berlin"
-
-    -   package-ecosystem: "pip"
-        directory: "/"
-        schedule:
-            interval: "weekly"
-            day: "wednesday"
-            time: "08:00"
-            timezone: "Europe/Berlin"
-
-        # Disable pull requests for python deps
-        open-pull-requests-limit: 0

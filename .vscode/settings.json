@@ -22,7 +22,6 @@
         "examples"
     ],
     "python.analysis.exclude": [
-        "**/venv/**",
         "**/__pycache__/**"
     ],
     "python.defaultInterpreterPath": "venv/bin/python",
@@ -34,7 +33,6 @@
     "notebook.cellFocusIndicator": "gutter",
     "notebook.lineNumbers": "on",
     "files.watcherExclude": {
-        "**/venv/**": true,
         "**/node_modules": true,
         "**/.ruff_cache": true,
         "**/.pytest_cache": true
@@ -51,4 +49,9 @@
         "**/.pytest_cache": true,
         "**/__pycache__/**": true
     },
+    "evenBetterToml.formatter.compactArrays": false,
+    "evenBetterToml.formatter.compactInlineTables": false,
+    "evenBetterToml.formatter.compactEntries": false,
+    "evenBetterToml.formatter.indentString": "    ",
+    "evenBetterToml.formatter.columnWidth": 120,
 }
