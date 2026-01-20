@@ -40,23 +40,21 @@ install: ## install all python dependencies
 # Install dev dependencies
 	uv sync --all-extras
 
+# Install pre-commit hooks
+	@$(PRE_COMMIT_OPT) install
 
 
-# .PHONY : build
-# build: # Twine package upload and checks
 
-# # Remove dist folder
-# 	@rm -rf ./dist/*
+.PHONY : build
+build: # Twine package upload and checks
 
-# # Build package with flit backend
-# 	@$(FLIT_OPT) build --setup-py
+# Remove dist folder
+	@rm -rf ./dist/*
 
-# # Check package using twine
-# 	@$(TWINE_OPT) check --strict ./dist/*
+	uv build
 
-# # Install package with flit
-# 	@$(FLIT_OPT) install --deps=none
-
+# Check package using twine
+	@$(TWINE_OPT) check --strict ./dist/*
 
 
 .PHONY : format

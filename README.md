@@ -1,10 +1,14 @@
 # matplotlib-radar
 
+[![Version](https://img.shields.io/pypi/v/matplotlib-radar)](https://pypi.org/project/matplotlib-radar/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/matplotlib-radar)
+[![codecov](https://codecov.io/gh/harryhaller001/matplotlib-radar/graph/badge.svg?token=WO0CGOVJOH)](https://codecov.io/gh/harryhaller001/matplotlib-radar)
+
 Feature-rich generation of radar chart based on matplotlib.
 
 ## Quick start
 
-Install package with `pip install matplotlib-radar`.
+Install package with `pip install matplotlib-radar` or `uv add matplotlib-radar`.
 
 Example code to generate radar chart:
 
@@ -33,8 +37,7 @@ git clone https://github.com/harryhaller001/matplotlib-radar
 cd matplotlib-radar
 
 # Setup virtualenv
-python3 -m virtualenv venv
-source venv/bin/activate
+uv venv
 
 # Install dependencies and setup precommit hook
 make install
