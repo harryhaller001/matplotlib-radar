@@ -37,7 +37,6 @@ optional-dependencies.docs = [
 ]
 optional-dependencies.test = [
     "coverage",
-    "flit",
     "ipykernel",
     "ipython",
     "ipywidgets",
@@ -51,20 +50,6 @@ optional-dependencies.test = [
 # https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://harryhaller001.github.io/matplotlib-radar/"
 urls.Source = "https://github.com/harryhaller001/matplotlib-radar"
-
-[tool.flit]
-sdist.include = [ "matplotlib_radar/", "tests/" ]
-sdist.exclude = [
-    "docs/",
-    "coverage",
-    ".git/",
-    ".github/",
-    ".pre-commit-config.yaml",
-    "Makefile",
-    ".python-version",
-    # "requirements.txt",
-    ".vscode/",
-]
 
 [tool.ruff]
 line-length = 120
