@@ -74,7 +74,7 @@ testing: ## Unittest of package
 
 .PHONY: typing
 typing: ## Run static code analysis
-	@$(TY_OPT) check $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py
+	@$(TY_OPT) check $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py $(DOCS_DIR)/generate_example_plot.py
 
 
 
