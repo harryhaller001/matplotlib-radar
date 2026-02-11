@@ -101,7 +101,9 @@ def radar_chart(
     assert ax is not None, "Axes at not defined."
 
     # Get colormap for polygons
-    if isinstance(cmap, str):
+    if isinstance(cmap, Colormap):
+        pass
+    elif isinstance(cmap, str):
         cmap = matplotlib.colormaps.get_cmap(cmap)
     elif isinstance(cmap, list):
         cmap = ListedColormap(cmap)

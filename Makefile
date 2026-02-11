@@ -1,23 +1,24 @@
 
 # Declare global variables
 
-BASE_DIR		= ${PWD}
+BASE_DIR			= ${PWD}
 
-PACKAGE_NAME	= matplotlib-radar
+PACKAGE_NAME		= matplotlib-radar
 
-PACKAGE_DIR		= $(BASE_DIR)/matplotlib_radar
-TEST_DIR		= $(BASE_DIR)/tests
-DOCS_DIR		= $(BASE_DIR)/docs
+PACKAGE_DIR			= $(BASE_DIR)/matplotlib_radar
+TEST_DIR			= $(BASE_DIR)/tests
+DOCS_DIR			= $(BASE_DIR)/docs
 
-UV_OPT			= uv run
-MYPY_OPT		= $(UV_OPT) mypy
-TEST_OPT		= $(UV_OPT) pytest
-TWINE_OPT		= $(UV_OPT) twine
-SPHINX_OPT		= $(UV_OPT) python -m sphinx
-COVERAGE_OPT	= $(UV_OPT) coverage
-FLIT_OPT		= $(UV_OPT) flit
-RUFF_OPT		= $(UV_OPT) ruff
-PRE_COMMIT_OPT	= $(UV_OPT) pre-commit
+UV_OPT				= uv
+UV_RUN_OPT			= uv run
+TY_OPT				= $(UV_RUN_OPT) ty
+TEST_OPT			= $(UV_RUN_OPT) pytest
+TWINE_OPT			= $(UV_RUN_OPT) twine
+SPHINX_OPT			= $(UV_RUN_OPT) python -m sphinx
+COVERAGE_OPT		= $(UV_RUN_OPT) coverage
+FLIT_OPT			= $(UV_RUN_OPT) flit
+RUFF_OPT			= $(UV_RUN_OPT) ruff
+PRE_COMMIT_OPT		= $(UV_RUN_OPT) pre-commit
 
 # Run help by default
 
@@ -38,7 +39,7 @@ help: ## This help.
 install: ## install all python dependencies
 
 # Install dev dependencies
-	uv sync --all-extras
+	$(UV_OPT) sync --all-extras
 
 # Install pre-commit hooks
 	@$(PRE_COMMIT_OPT) install
@@ -46,12 +47,11 @@ install: ## install all python dependencies
 
 
 .PHONY : build
-build: # Twine package upload and checks
+build: ## Twine package upload and checks
 
-# Remove dist folder
 	@rm -rf ./dist/*
 
-	uv build
+	$(UV_OPT) build
 
 # Check package using twine
 	@$(TWINE_OPT) check --strict ./dist/*
@@ -65,8 +65,6 @@ format: ## Lint and format code with flake8 and black
 
 .PHONY: testing
 testing: ## Unittest of package
-# @$(TEST_OPT) --show-capture=log
-
 	@$(COVERAGE_OPT) run -m pytest
 	@$(COVERAGE_OPT) html
 
@@ -76,7 +74,7 @@ testing: ## Unittest of package
 
 .PHONY: typing
 typing: ## Run static code analysis
-	@$(MYPY_OPT) $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py
+	@$(TY_OPT) check $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py
 
 
 
@@ -92,13 +90,12 @@ docs: ## Build sphinx docs
 	@$(SPHINX_OPT) -M html $(DOCS_DIR)/source $(DOCS_DIR)/_build
 
 
-# Run all checks (always before committing!)
-.PHONY: check
-check: install format typing testing docs precommit build ## Full check of package
+
+.PHONY: check ## Full check of package
+check: install format typing testing docs precommit build
 
 
 
 .PHONY : precommit
 precommit: ## Run precommit file
-#	@pre-commit run --all-files --verbose
 	@$(PRE_COMMIT_OPT) run --all-files
