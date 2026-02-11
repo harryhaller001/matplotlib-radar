@@ -5,7 +5,7 @@ BASE_DIR			= ${PWD}
 
 PACKAGE_NAME		= matplotlib-radar
 
-PACKAGE_DIR			= $(BASE_DIR)/matplotlib_radar
+PACKAGE_DIR			= $(BASE_DIR)/src/matplotlib_radar
 TEST_DIR			= $(BASE_DIR)/tests
 DOCS_DIR			= $(BASE_DIR)/docs
 

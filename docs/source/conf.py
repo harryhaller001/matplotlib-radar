@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime
 
 DOCS_DIR = Path(__file__).parent
-sys.path.insert(0, os.path.abspath("../../matplotlib_radar"))
+sys.path.insert(0, os.path.abspath("../../src/matplotlib_radar"))
 
 # Project information
 project = "matplotlib-radar"
@@ -85,7 +85,7 @@ autoapi_options = [
     "special-members",
     "imported-members",
 ]
-autoapi_dirs = ["../../matplotlib_radar"]
+autoapi_dirs = ["../../src/matplotlib_radar"]
 autoapi_member_order = "alphabetical"
 autodoc_typehints = "description"
 

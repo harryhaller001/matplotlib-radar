@@ -16,14 +16,6 @@
         "editor.formatOnSaveMode": "file",
         "editor.defaultFormatter": "charliermarsh.ruff"
     },
-    "python.analysis.extraPaths": [
-        "matplotlib_radar",
-        "tests",
-        "examples"
-    ],
-    "python.analysis.exclude": [
-        "**/__pycache__/**"
-    ],
     "python.defaultInterpreterPath": ".venv/bin/python",
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
@@ -35,7 +27,9 @@
     "files.watcherExclude": {
         "**/node_modules": true,
         "**/.ruff_cache": true,
-        "**/.pytest_cache": true
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true,
+        "**/coverage_report": true,
     },
     "files.exclude": {
         "**/.git": true,
@@ -47,6 +41,7 @@
         "**/node_modules": true,
         "**/.ruff_cache": true,
         "**/.pytest_cache": true,
+        "**/.mypy_cache": true,
         "**/__pycache__/**": true
     },
     "evenBetterToml.formatter.compactArrays": false,
