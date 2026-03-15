@@ -47,7 +47,6 @@ optional-dependencies.test = [
     "ty>=0.0.16",
     "types-requests",
 ]
-# https://docs.pypi.org/project_metadata/#project-urls
 urls.Documentation = "https://harryhaller001.github.io/matplotlib-radar/"
 urls.Source = "https://github.com/harryhaller001/matplotlib-radar"
 
@@ -69,7 +68,6 @@ keep_full_version = false
 max_supported_python = "3.14"
 
 [tool.pytest]
-# Pytest config
 ini_options.minversion = "7.0"
 ini_options.log_format = "%(asctime)s %(levelname)s %(message)s"
 ini_options.log_date_format = "%Y-%m-%d %H:%M:%S"
@@ -84,7 +82,6 @@ ini_options.addopts = [
 
 [tool.coverage]
 run.omit = [ "*/tests/*" ]
-# Coverage config
 run.source = [ "matplotlib_radar" ]
 report.exclude_lines = [ "pass", "raise" ]
 report.ignore_errors = true
