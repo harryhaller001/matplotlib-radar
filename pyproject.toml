@@ -86,3 +86,6 @@ run.source = [ "matplotlib_radar" ]
 report.exclude_lines = [ "pass", "raise" ]
 report.ignore_errors = true
 html.directory = "coverage_report"
+
+[tool.ty]
+src.exclude = [ "docs/source/notebooks/example.ipynb" ]
