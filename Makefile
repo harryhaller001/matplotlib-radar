@@ -3,10 +3,6 @@
 
 BASE_DIR			= ${PWD}
 
-PACKAGE_NAME		= matplotlib-radar
-
-PACKAGE_DIR			= $(BASE_DIR)/src/matplotlib_radar
-TEST_DIR			= $(BASE_DIR)/tests
 DOCS_DIR			= $(BASE_DIR)/docs
 
 UV_OPT				= uv
@@ -59,8 +55,8 @@ build: ## Twine package upload and checks
 
 .PHONY : format
 format: ## Lint and format code with flake8 and black
-	@$(RUFF_OPT) format $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py
-	@$(RUFF_OPT) check --fix $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py
+	@$(RUFF_OPT) format
+	@$(RUFF_OPT) check --fix
 
 
 .PHONY: testing
@@ -74,7 +70,7 @@ testing: ## Unittest of package
 
 .PHONY: typing
 typing: ## Run static code analysis
-	@$(TY_OPT) check $(PACKAGE_DIR) $(TEST_DIR) $(DOCS_DIR)/source/conf.py $(DOCS_DIR)/generate_example_plot.py
+	@$(TY_OPT) check
 
 
 
